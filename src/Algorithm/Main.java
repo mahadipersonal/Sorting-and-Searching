@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner sc = new Scanner(System.in);
+    static int[] finalSortedArray;
 
     public static void main(String[] args){
-        Scanner sc = new Scanner(System.in);
         System.out.print("How Many Elements: ");
         int numberOfElements = sc.nextInt();
         System.out.println();
@@ -17,8 +18,11 @@ public class Main {
         System.out.println("\nUnsorted Array: "+ Arrays.toString(unSortedArray));
 
         bubbleSorting(unSortedArray);
-        insertionSorting(unSortedArray);
         selectionSort(unSortedArray);
+        insertionSorting(unSortedArray);
+
+        //Searching
+        searching(unSortedArray);
 
     }
 
@@ -31,7 +35,10 @@ public class Main {
 
     private static void insertionSorting(int[] unSortedArray) {
         InsertionSort insertionSort = new InsertionSort();
+        int[] sortedArray = insertionSort.sort(unSortedArray);
 
+        System.out.println("Sorted Using InsertionSort: " + Arrays.toString(sortedArray));
+        finalSortedArray = sortedArray;
     }
 
     private static void selectionSort(int[] unSortedArray) {
@@ -39,5 +46,18 @@ public class Main {
         int[] sortedArray = selectionSort.sort(unSortedArray);  // method returns a sorted array
 
         System.out.println("Sorted Using SelectionSort: " + Arrays.toString(sortedArray));
+    }
+
+    private static void searching(int[] unSortedArray){
+        System.out.print("\nWhich number you want search: ");
+        int numberToSearch = sc.nextInt();
+
+        System.out.print("Result Using LinearSearch: ");
+        LinearSearch linearSearch = new LinearSearch();
+        linearSearch.search(unSortedArray,numberToSearch);
+
+        System.out.print("Result Using BinarySearch: ");
+        BinarySearch binarySearch = new BinarySearch();
+        binarySearch.search(finalSortedArray,numberToSearch);
     }
 }
